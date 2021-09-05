@@ -6,7 +6,7 @@ const SearchContext = createContext({});
 
 export const SelectSearch = ({children}) => {
 
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState('CoderTayrone');
 
   console.log(search)
 

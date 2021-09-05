@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { ContainerSubNav, ContainerSub } from './styles'
 
 function SubNav() {
@@ -7,8 +8,8 @@ function SubNav() {
       <div></div>
       <nav>
         <ul>
-          <li>Overview</li>
-          <li>Repositories</li>
+         <Link to="/"> <li>Overview</li></Link>
+          <Link to="/repositories"><li>Repositories</li></Link>
           <li>Projects</li>
           <li>Packages</li>
         </ul>

@@ -58,6 +58,8 @@ export const ContainerNav = styled.div `
     button + button {
       border: 1px solid white;
       border-radius: .4rem;
+      color: white;
+      text-decoration: none;
     }
   }
 

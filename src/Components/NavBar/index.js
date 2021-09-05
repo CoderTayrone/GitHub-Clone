@@ -1,7 +1,39 @@
 import { ContainerNavBar, ContainerNav } from "./styles";
+import React from 'react'
+import { useFormik } from 'formik';
+import { useGetSearch } from "../../Contexts/SearchContext";
+import socialMediaAuth from "../../services/auth";
+import { githubProvider } from "../../config/authMethods";
 
 
-function NavBar () {
+const NavBar = () => {  
+    const { setSearch} = useGetSearch()
+    // Pass the useFormik() hook initial form values and a submit function that will
+ 
+    // be called when the form is submitted
+ 
+    const formik = useFormik({
+ 
+      initialValues: {
+ 
+        name: '',
+ 
+      },
+ 
+      onSubmit: values => {
+ 
+        setSearch(values)
+
+      },
+ 
+    });
+
+    const handleOnClick = async(provider) => {
+      const res = await socialMediaAuth(provider)
+      console.log(res)
+    }
+
+   
   return (
   <>
     <ContainerNavBar>
@@ -19,12 +51,34 @@ function NavBar () {
 
 
           </nav>
-          <form>
-            <input type="text" placeholder="Search"></input>
-            <button>Sign In</button>
-            <button>Sign Up</button>
+  
+          <form onSubmit={formik.handleSubmit}>
+
+            <input
+
+              id="name"
+
+              name="name"
+
+              type="text"
+
+              onChange={formik.handleChange}
+
+              value={formik.values.name}
+
+            />
+
+            <button type="submit">Submit</button>
+            <button type="button" onClick={()=> handleOnClick(githubProvider)}>Sign in</button>
 
           </form>
+
+          {/* <form action="/login">
+          <input type="text" onChange={handleChange} placeholder="Search" />
+            <button type="submit">Sign In</button>
+            <button>Sign Up</button>
+
+          </form> */}
       </ContainerNav>
     </ContainerNavBar>
   </>
