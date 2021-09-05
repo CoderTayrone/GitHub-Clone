@@ -11,19 +11,21 @@ import {
 function ContainerProfile() {
 
   const {search, setSearch} = useGetSearch()
+  const {log, setLog} = useGetSearch()
 
   const [users, setUsers] = useState();
   const [repos, setRepos] = useState();
+
   
   useEffect(() => {
-    api.get(`users/${search.name}`)
+    api.get(`users/${log?.displayName ? log?.displayName : search?.name}`)
       .then(response => setUsers(response.data))
 
     api.get(`users/${search?.name}/repos`)
       .then(response => setRepos(response.data))
   }, [search.name])
 
-
+  console.log(log)
 
   return (
     <Container>
@@ -34,7 +36,9 @@ function ContainerProfile() {
         <ContainerHeaderProfile>
           <HeaderProfile> {/* Header */}
             <img src={users?.avatar_url}></img>
-            <h2>{users?.name}</h2>
+            {
+              log?.displayName ? <h2>{log?.displayName}</h2> : <h2>{users?.name}</h2>
+            }
             <h3>{users?.login}</h3>
             <a href="#">Edit Profile</a>
           </HeaderProfile>

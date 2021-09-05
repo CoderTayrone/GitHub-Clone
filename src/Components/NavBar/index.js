@@ -8,6 +8,7 @@ import { githubProvider } from "../../config/authMethods";
 
 const NavBar = () => {  
     const { setSearch} = useGetSearch()
+    const { setLog} = useGetSearch()
     // Pass the useFormik() hook initial form values and a submit function that will
  
     // be called when the form is submitted
@@ -30,7 +31,7 @@ const NavBar = () => {
 
     const handleOnClick = async(provider) => {
       const res = await socialMediaAuth(provider)
-      console.log(res)
+      setLog(res)
     }
 
    
